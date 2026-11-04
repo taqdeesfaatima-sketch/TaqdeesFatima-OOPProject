@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Project.Admin;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +23,9 @@ namespace Project.Admin
         public AdminModel findproductbyname(string name)
         {
             var products = _repository.GetAll();
-            foreach(var product in products)
+            foreach (var product in products)
             {
-                if(product.productName==name)
+                if (product.productName == name)
                 {
                     return product;
                 }
@@ -34,15 +36,15 @@ namespace Project.Admin
         {
             var products = _repository.GetAll();
             AdminModel producttodelete = null;
-            foreach(var product in products)
+            foreach (var product in products)
             {
-                if(product.productName==name)
+                if (product.productName == name)
                 {
                     producttodelete = product;
                     break;
                 }
             }
-            if(producttodelete !=null)
+            if (producttodelete != null)
             {
                 products.Remove(producttodelete);
                 _repository.SaveAll(products);
@@ -51,13 +53,43 @@ namespace Project.Admin
             return false;
         }
 
-        public List<AdminModel>getallproducts()
+        public List<AdminModel> getallproducts()
         {
             return _repository.GetAll();
         }
-        public void  clearallproducts()
+        public void clearallproducts()
         {
             _repository.ClearAll();
+        }
+        public List<AdminModel>CorrectProductPlace(string Correctplace)
+        {
+            var Products = _repository.GetAll();
+            List<AdminModel> products = new List<AdminModel>();
+            foreach (var product in Products)
+            {
+
+                if (product.productName == Correctplace)
+                {
+                    product.productName = Correctplace;
+                }
+                return products;
+            }
+            return null;
+        }      
+        
+        public List<AdminModel>filterProductCategory(string category)
+        {
+            var  Products = _repository.GetAll();
+            List<AdminModel> filteredproducts = new List<AdminModel>();
+            foreach (var product in Products)
+            {
+                if (product.category == category)
+                {
+                    product.category = category;
+                }
+                return filteredproducts;
+            }
+            return null;
         }
     }
 }

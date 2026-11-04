@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -90,17 +91,58 @@ namespace Project.Admin
             }
             Console.ReadKey();
         }
-            private void Clearallproducts()
-            {
+        private void Clearallproducts()
+        {
             Console.Clear();
             _adminservice.clearallproducts();
             Console.WriteLine("All records clearred .");
             Console.ReadKey();
-            }
+        }
 
+        private void FindCorrectProductsPlace()
+        {
+            Console.Clear();
+            Console.WriteLine("Find correct place of produt");
+            Console.WriteLine("Product correct place");
+            string place = (Console.ReadLine());
+            var products = _adminservice.getallproducts();
+            foreach (var p in products)
+            {
+                Console.WriteLine($"place:{p.productName}");
+            }
+            if (CorrectProductPlace == place)
+            {
+                Console.WriteLine("Correct place is found");
+            }
+            else
+            {
+                Console.WriteLine("Product not found on correct place");
+            }
+            Console.ReadKey();
+        }
+        private void filterproductcategory(string category) {
+            Console.Clear();
+            Console.WriteLine("===Filter products===");
+            Console.WriteLine("Enter product category");
+            string productcategory = (Console.ReadLine());
+            var products = _adminservice.getallproducts();
+            foreach (var p in products)
+            {
+                Console.WriteLine($"category:{p.category}");
+            }
+            if (productcategory == category)
+            {
+                Console.WriteLine("Product category found");
+            }
+            else
+            {
+                Console.WriteLine("Product category not found");
+            }
+               Console.ReadKey();
+            }
+    }
     }
 
-}
         
     
 

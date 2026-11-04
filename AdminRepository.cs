@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project.Customer;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,6 @@ namespace Project.Admin
     internal class AdminRepository
     {
         private readonly string _filePath = "products.txt";
-
         public void Save(AdminModel Product)
         {
             using (StreamWriter writer = new StreamWriter(_filePath, true))
@@ -18,7 +18,6 @@ namespace Project.Admin
                 writer.WriteLine(Product.ToString());
             }
         }
-
         public void SaveAll(List<AdminModel> products)
         {
             using (StreamWriter writer =new StreamWriter(_filePath,false))
@@ -29,16 +28,13 @@ namespace Project.Admin
                 }
             }
         }
-
         public List<AdminModel> GetAll()
         {
             List<AdminModel> products = new List<AdminModel>();
-            string path = "products.txt";
             if(!File.Exists(_filePath))
             {
                 return products;
             }
-
             string[] lines = File.ReadAllLines(_filePath);
             foreach(var line in lines)
             {
@@ -57,10 +53,11 @@ namespace Project.Admin
             }
             return products;
         }
-
         public void ClearAll()
         {
             File.WriteAllText(_filePath, string.Empty);
         }
     }
 }
+
+

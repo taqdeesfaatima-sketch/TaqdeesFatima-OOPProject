@@ -53,8 +53,8 @@ namespace Project.Admin
             return $"{productName},{category},{supplierName},{expiryDate},{status},{quantity},{soldQty},{buyPrice},{sellPrice},{totalSale}";
         }
         public AdminModel(string productName,int quantity, string category)
-        {
-            this.productName = productName = productName;
+        {                                                                                                                                                                                   
+            this.productName = this.productName = productName;
             this.quantity = quantity;
             this.category = category;
         }
